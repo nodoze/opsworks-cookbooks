@@ -36,4 +36,4 @@ link '/mobs/themes' do
   link_type :symbolic
   to '/usr/share/tomcat7/webapp/ROOT/themes'
   action :create 
-End
+end
