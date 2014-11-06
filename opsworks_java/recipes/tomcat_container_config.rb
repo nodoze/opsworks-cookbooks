@@ -19,3 +19,21 @@ template 'tomcat server configuration' do
   backup false
   notifies :restart, 'service[tomcat]'
 end
+
+directory '/mobs' do
+  owner 'tomcat'
+  group 'tomcat'
+  action :create
+end
+
+directory '/uploads' do
+  owner 'tomcat'
+  group 'tomcat'
+  action :create
+end
+
+link '/mobs/themes' do
+  link_type :symbolic
+  to '/usr/share/tomcat7/webapp/ROOT/themes'
+  action :create 
+End
