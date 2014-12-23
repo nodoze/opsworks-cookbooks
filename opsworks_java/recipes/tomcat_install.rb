@@ -7,7 +7,6 @@ if node['opsworks_java']['tomcat']['deploy_manager_apps']
   tomcat_pkgs << value_for_platform(
     'debian' => ["tomcat#{node['opsworks_java']['tomcat']['base_version']}-admin"],
     'rhel' => ["tomcat#{node['opsworks_java']['tomcat']['base_version']}-admin-webapps"]
-  }
   )
 end
 
