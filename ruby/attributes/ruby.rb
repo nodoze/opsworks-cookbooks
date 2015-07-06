@@ -30,7 +30,7 @@ when "2.1"
 when "2.0.0"
   default[:ruby][:major_version] = '2'
   default[:ruby][:minor_version] = '0'
-  default[:ruby][:patch] = 'p481' # this attribute will disappear in favor of the sematic versioning schema
+  default[:ruby][:patch] = 'p645' # this attribute will disappear in favor of the sematic versioning schema
   default[:ruby][:patch_version] = node[:ruby][:patch]
   default[:ruby][:pkgrelease] = '1'
 
