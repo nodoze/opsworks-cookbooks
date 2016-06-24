@@ -1,7 +1,12 @@
-tomcat_pkgs = value_for_platform_family(
-  'debian' => ["tomcat#{node['opsworks_java']['tomcat']['base_version']}", 'libtcnative-1'],
-  'rhel' => ["tomcat#{node['opsworks_java']['tomcat']['base_version']}", 'tomcat-native']
-)
+tomcat_pkgs = case node["platform_family"]
+              when "debian" then ["tomcat#{node["opsworks_java"]["tomcat"]["base_version"]}", "libtcnative-1"]
+              when "rhel" then
+                if rhel7?
+                  ["tomcat", "tomcat-native"]
+                else
+                  ["tomcat#{node["opsworks_java"]["tomcat"]["base_version"]}", "tomcat-native"]
+                end
+              end
 
 if node['opsworks_java']['tomcat']['deploy_manager_apps']
   tomcat_pkgs << value_for_platform(
@@ -34,6 +39,8 @@ end
 tomcat_pkgs.each do |pkg|
   package pkg do
     action :install
+    retries 3
+    retry_delay 5
   end
 end
 
